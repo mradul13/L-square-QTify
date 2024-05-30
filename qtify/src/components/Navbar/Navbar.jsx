@@ -16,7 +16,7 @@ const Navbar = ()=>{
                 </SearchBox>
             </div>
             <Button
-                text="GIVE FEEDBACK"
+                text="Give Feedback"
                 eventHandler={{ event: "onClick", handler: ()=>{} }}
             />
         </nav>
