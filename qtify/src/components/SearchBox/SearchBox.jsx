@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./SearchBox.module.css";
 import { ReactComponent as SearchIcon } from "../../assets/Search icon.svg";
 
 
 const SearchBox = (props) => {
-  const { placeholder, data } = props;
+  const { placeholder } = props;
 	const [inputValue, setInputValue] = useState("");
 
 	return (
