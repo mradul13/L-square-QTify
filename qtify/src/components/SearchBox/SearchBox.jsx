@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SearchBox.module.css";
 import { ReactComponent as SearchIcon } from "../../assets/Search icon.svg";
-
+import Menu from "../Menu/Menu";
+import useComponentVisible from "../../hooks/useComponentVisible";
 
 const SearchBox = (props) => {
-  const { placeholder } = props;
+    const { placeholder, data} = props;
 	const [inputValue, setInputValue] = useState("");
+	const [filteredOptions, setFilteredOptions] = useState([]);
+
+	const { ref, isComponentVisible, setIsComponentVisible } =
+		useComponentVisible(true);
+
+	const _filterData = (data) => {
+		if (!inputValue) {
+			setFilteredOptions([]);
+			return;
+		}
+
+		const filteredOptions = data?.filter((albumsData) =>
+			albumsData?.title?.toLowerCase()?.includes(inputValue.toLowerCase())
+		);
+
+		setFilteredOptions(filteredOptions);
+	};
+
+	useEffect(() => {
+		_filterData(data);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [inputValue]);
 
 	return (
 		<div>
-			<div>
+			<div onClick={() => setIsComponentVisible(true)}>
 				<form className={styles.wrapper}>
 					<input
 						className={styles.search}
@@ -22,6 +45,18 @@ const SearchBox = (props) => {
 					</button>
 				</form>
 			</div>
+
+			{isComponentVisible && (
+				<div className={styles.dropdownWrapper} ref={ref}>
+					{filteredOptions?.length ? (
+						<Menu albums={filteredOptions} />
+					) : inputValue ? (
+						<div className={styles.not_found_wrapper}>
+							<p className={styles.not_found_message}>No Data Found</p>
+						</div>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 };
