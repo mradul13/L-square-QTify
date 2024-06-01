@@ -2,11 +2,11 @@ import {React, useEffect, useState} from "react";
 import {
 	fetchTopAlbums,
 	fetchNewAlbums,
-	fetchAllSongs,
+	// fetchAllSongs,
 } from "../../api/api.js";
 import { Toaster } from "react-hot-toast";
 import { errorHandler } from "../../config/helper-methods";
-import { accordionData } from "../../config/helper-config";
+// import { accordionData } from "../../config/helper-config";
 import styles from "./LandingPage.module.css";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import SearchBox from "../../components/SearchBox/SearchBox.jsx";
@@ -19,7 +19,7 @@ function LandingPage() {
 
 	const [topAlbumData, setTopAlbumData] = useState([]);
 	const [newAlbumData, setNewAlbumData] = useState([]);
-	const [allSongsData, setAllSongsData] = useState([]);
+	// const [allSongsData, setAllSongsData] = useState([]);
 	const [loadingState, setLoadingState] = useState({
 		topAlbum: true,
 		newAlbum: true,
